@@ -3,9 +3,9 @@ const fs = require("fs");
 const Blog = require("../models/blog");
 const {
   BACKEND_SERVER_PATH,
-  CLOUD_NAME,
-  API_SECRET,
-  API_KEY,
+  // CLOUD_NAME,
+  // API_SECRET,
+  // API_KEY,
 } = require("../config/index");
 const BlogDTO = require("../dto/blog");
 const BlogDetailsDTO = require("../dto/blog-details");
@@ -47,13 +47,13 @@ const blogController = {
     const { title, author, content, photo } = req.body;
 
     // read as buffer
-    // const buffer = Buffer.from(
-    //   photo.replace(/^data:image\/(png|jpg|jpeg);base64,/, ""),
-    //   "base64"
-    // );
+    const buffer = Buffer.from(
+      photo.replace(/^data:image\/(png|jpg|jpeg);base64,/, ""),
+      "base64"
+    );
 
     // allot a random name
-    // const imagePath = `${Date.now()}-${author}.png`;
+    const imagePath = `${Date.now()}-${author}.png`;
 
     // save to cloudinary
     let response;
@@ -72,7 +72,7 @@ const blogController = {
         title,
         author,
         content,
-        photoPath: response.url,
+        photoPath: `${BACKEND_SERVER_PATH}/storage/${imagePath}`
       });
 
       await newBlog.save();
@@ -164,13 +164,13 @@ const blogController = {
       fs.unlinkSync(`storage/${previousPhoto}`);
 
       // read as buffer
-      // const buffer = Buffer.from(
-      //   photo.replace(/^data:image\/(png|jpg|jpeg);base64,/, ""),
-      //   "base64"
-      // );
+      const buffer = Buffer.from(
+        photo.replace(/^data:image\/(png|jpg|jpeg);base64,/, ""),
+        "base64"
+      );
 
       // allot a random name
-      // const imagePath = `${Date.now()}-${author}.png`;
+      const imagePath = `${Date.now()}-${author}.png`;
 
       // save locally
       let response;
@@ -186,7 +186,7 @@ const blogController = {
         {
           title,
           content,
-          photoPath: response.url,
+          photoPath: `${BACKEND_SERVER_PATH}/storage/${imagePath}`,
         }
       );
     } else {

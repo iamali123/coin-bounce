@@ -10,6 +10,7 @@ dbConnect();
 
 app.use(cookieParser());
 app.use(express.json());
+app.use("/storage", express.static("storage"));
 
 app.use(router);
 
