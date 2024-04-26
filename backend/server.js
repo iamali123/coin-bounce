@@ -8,8 +8,8 @@ const cors = require("cors");
 
 const corsOptions = {
   credentials: true,
-  // origin: ["http://localhost:3000"],
-  origin: ["https://coin-bounce-frontend.vercel.app"],
+  origin: ["http://localhost:3000"],
+  // origin: ["https://coin-bounce-frontend.vercel.app"],
 };
 
 const app = express();
