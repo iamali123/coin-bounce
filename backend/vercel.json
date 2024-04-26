@@ -1,19 +1,27 @@
 {
     "version": 2,
-    "builds": [
-    {
-    "src": "*.js",
-    "use": "@vercel/node"
-    }
-    ],
     "routes": [
-    {
-    "src": "/(.*)",
-    "dest": "/",
-    "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-    "headers": {
-        "Access-Control-Allow-Origin": "*"
-    }
-}
+      {
+        "src": "/(.*)",
+        "dest": "/",
+        "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"]
+      }
+    ],
+    "rewrites": [],
+    "headers": [
+      {
+        "source": "/(.*)",
+        "headers": [
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "https://coin-bounce-frontend.vercel.app"
+          },
+          {
+            "key": "Access-Control-Allow-Credentials",
+            "value": "true"
+          }
+        ]
+      }
     ]
-}
+  }
+  
